@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Silent Remover — MP3 Edition</title>
+  
+  <!-- --- GOOGLE ADSENSE CODE START (Sahi Jagah) --- -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8604461631146436"
+     crossorigin="anonymous"></script>
+  <!-- --- GOOGLE ADSENSE CODE END --- -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
+
+  <style>
+    /* Script yahan se hata diya hai taaki design kharab na ho */
+    :root {
+      --accent-primary: #3b82f6;
+      --accent-secondary: #8b5cf6;
+      --accent-glow: #60a5fa;
+      --bg-deep: #030712;
+      --glass-panel: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Ambient Background */
+    .ambient-light {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 50%, #111 0%, #000 100%);
+    }
+    .blob {
+      position: absolute;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: float 20s infinite ease-in-out;
+    }
+    .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent-primary); animation-delay: 0s; }
+    .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: var(--accent-secondary); animation-delay: -5s; }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(30px, 50px) rotate(10deg); }
+      66% { transform: translate(-20px, 20px) rotate(-5deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    /* Top Banner */
+    .top-banner {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 12px 0;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    }
+
+    .marquee-container {
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 25s linear infinite;
+      font-family: 'Syncopate', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: #fff;
+      text-transform: uppercase;
+    }
+    
+    .highlight { color: var(--accent-glow); text-shadow: 0 0 10px var(--accent-primary); }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Main Card */
+    .container {
+      margin-top: 60px;
+      width: 90%;
+      max-width: 850px;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: var(--glass-panel);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 50px -10px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+      font-family: 'Syncopate', sans-serif;
+      text-align: center;
+      font-size: 1.8rem;
+      margin: 0 0 10px 0;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+
+    p.subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Controls */
+    label {
+      color: var(--accent-glow);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .file-upload-wrapper {
+      position: relative;
+      margin-bottom: 30px;
+    }
+    input[type="file"] {
+      width: 100%;
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border: 1px dashed var(--accent-secondary);
+      border-radius: 12px;
+      color: #fff;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    input[type="file"]:hover {
+      background: rgba(139, 92, 246, 0.1);
+      border-color: var(--accent-glow);
+    }
+    input[type="file"]::file-selector-button {
+      background: var(--accent-primary);
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      margin-right: 15px;
+      cursor: pointer;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .input-box {
+      background: rgba(0,0,0,0.2);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      transition: 0.3s;
+    }
+    .input-box:hover { border-color: rgba(255,255,255,0.2); }
+
+    input[type="number"] {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #334155;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      padding: 5px 0;
+      outline: none;
+      transition: 0.3s;
+    }
+    input[type="number"]:focus {
+      border-color: var(--accent-glow);
+    }
+
+    small {
+      color: #64748b;
+      margin-top: 8px;
+      display: block;
+      font-size: 0.75rem;
+    }
+
+    /* Buttons */
+    .action-area {
+      margin-top: 40px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    button, .download-btn {
+      flex: 1;
+      padding: 18px 24px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: white;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+    }
+
+    button:hover:not(:disabled), .download-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 30px -10px rgba(139, 92, 246, 0.5);
+    }
+
+    button:disabled {
+      background: #1e293b;
+      color: #475569;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .download-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4);
+      display: none;
+    }
+    
+    /* MP3 Button Style */
+    .download-btn-mp3 {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.4);
+      display: none;
+    }
+    .download-btn-mp3:hover {
+      box-shadow: 0 20px 30px -10px rgba(245, 158, 11, 0.5);
+    }
+
+    h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+    }
+
+    #log {
+      margin-top: 25px;
+      padding: 15px;
+      border-radius: 8px;
+      background: #000;
+      border: 1px solid #333;
+      font-family: 'Courier New', monospace;
+      color: #22c55e;
+      font-size: 0.85rem;
+      min-height: 20px;
+    }
+
+    /* Visualizer */
+    .visualizer-container {
+      margin-top: 20px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid var(--glass-border);
+    }
+    canvas {
+      width: 100%;
+      height: 100px;
+      display: block;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 10px;
+    }
+    audio {
+      width: 100%;
+      height: 35px;
+      opacity: 0.7;
+      border-radius: 4px;
+      filter: invert(1) hue-rotate(180deg);
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-light">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="top-banner">
+    <div class="marquee-container">
+      <div class="marquee-content">
+        <span class="highlight">MADE BY DEEPAK FOR CREATOR HELP</span> &nbsp; /// &nbsp; SYSTEM STATUS: OPTIMAL &nbsp; /// &nbsp; AI AUDIO ENGINE 2099 &nbsp; /// &nbsp; <span class="highlight">NO SERVER UPLOAD</span> &nbsp; /// &nbsp; INSTANT PROCESSING &nbsp; /// &nbsp; <span class="highlight">MADE BY DEEPAK FOR CREATOR HELP</span> &nbsp; /// &nbsp; SYSTEM STATUS: OPTIMAL &nbsp; /// &nbsp;
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h2>Silent Remover Pro</h2>
+      <p class="subtitle">Next-Gen Audio Visualizer & Converter</p>
+
+      <div class="file-upload-wrapper">
+        <label>Input Source File</label>
+        <input id="file" type="file" accept="audio/*" />
+      </div>
+
+      <div class="controls-grid">
+        <div class="input-box">
+          <label>Min Silence (Sec)</label>
+          <input id="minSilence" type="number" step="0.05" value="0.1" min="0.0" />
+          <small>Duration to be cut (e.g. 0.1)</small>
+        </div>
+        <div class="input-box">
+          <label>Threshold (RMS)</label>
+          <input id="threshold" type="number" step="0.0" value="0.010" min="0.00001" />
+          <small>Sensitivity (Lower = More Sensitive)</small>
+        </div>
+      </div>
+
+      <div class="action-area">
+        <button id="process">Run Processor</button>
+        <a id="downloadLinkWav" class="download-btn">Download WAV</a>
+        <a id="downloadLinkMp3" class="download-btn download-btn-mp3">Download MP3</a>
+      </div>
+
+      <div id="log"><small>// System Ready...</small></div>
+
+      <h4>Original Audio Spectrum</h4>
+      <div class="visualizer-container">
+        <canvas id="canvasOrig"></canvas>
+        <audio id="audioOrig" controls crossorigin="anonymous"></audio>
+      </div>
+      
+      <h4>Processed Output</h4>
+      <div class="visualizer-container">
+        <canvas id="canvasOut"></canvas>
+        <audio id="audioOut" controls crossorigin="anonymous"></audio>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+// --- CORE LOGIC ---
+
+async function readFileAsArrayBuffer(file){
+  return await file.arrayBuffer();
+}
+
+function rms(buffer, start, end){
+  let sum=0, cnt=0;
+  for(let i=start;i<end;i++){ const v=buffer[i]; sum+=v*v; cnt++; }
+  return Math.sqrt(sum / Math.max(cnt,1));
+}
+
+// WAV Encoder
+function encodeWAV(buffers, sampleRate){
+  const numChannels = buffers.length;
+  const length = buffers[0].length;
+  const buffer = new ArrayBuffer(44 + length * numChannels * 2);
+  const view = new DataView(buffer);
+  function writeString(view, offset, string){ for(let i=0;i<string.length;i++) view.setUint8(offset+i,string.charCodeAt(i)); }
+  writeString(view,0,'RIFF');
+  view.setUint32(4,36 + length * numChannels * 2,true);
+  writeString(view,8,'WAVE');
+  writeString(view,12,'fmt ');
+  view.setUint32(16,16,true);
+  view.setUint16(20,1,true);
+  view.setUint16(22,numChannels,true);
+  view.setUint32(24,sampleRate,true);
+  view.setUint32(28,sampleRate * numChannels * 2,true);
+  view.setUint16(32,numChannels * 2,true);
+  view.setUint16(34,16,true);
+  writeString(view,36,'data');
+  view.setUint32(40,length * numChannels * 2,true);
+
+  let offset = 44;
+  for(let i=0;i<length;i++){
+    for(let ch=0; ch<numChannels; ch++){
+      let s = Math.max(-1, Math.min(1, buffers[ch][i]));
+      view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+      offset += 2;
+    }
+  }
+  return new Blob([view], {type:'audio/wav'});
+}
+
+// MP3 Encoder using LAMEJS
+function encodeMP3(channels, sampleRate) {
+  if (!window.lamejs) {
+    console.error("Lamejs not loaded");
+    return null;
+  }
+
+  const mp3encoder = new lamejs.Mp3Encoder(channels.length, sampleRate, 128); // 128kbps MP3
+  const mp3Data = [];
+
+  // lamejs requires Int16 array
+  const left = channels[0];
+  const right = channels.length > 1 ? channels[1] : channels[0];
+  const samples = left.length;
+  
+  const sampleBlockSize = 1152; 
+  const leftInt = new Int16Array(samples);
+  const rightInt = new Int16Array(samples);
+
+  // Convert Float32 (-1.0 to 1.0) to Int16 (-32768 to 32767)
+  for (let i = 0; i < samples; i++) {
+    leftInt[i] = Math.max(-1, Math.min(1, left[i])) * 32767;
+    rightInt[i] = Math.max(-1, Math.min(1, right[i])) * 32767;
+  }
+
+  // Encode in chunks
+  for (let i = 0; i < samples; i += sampleBlockSize) {
+    const leftChunk = leftInt.subarray(i, i + sampleBlockSize);
+    const rightChunk = rightInt.subarray(i, i + sampleBlockSize);
+    const mp3buf = mp3encoder.encodeBuffer(leftChunk, rightChunk);
+    if (mp3buf.length > 0) {
+      mp3Data.push(mp3buf);
+    }
+  }
+  
+  const mp3buf = mp3encoder.flush();
+  if (mp3buf.length > 0) {
+    mp3Data.push(mp3buf);
+  }
+
+  return new Blob(mp3Data, { type: 'audio/mp3' });
+}
+
+async function processBuffer(audioBuffer, minSilenceSec, rmsThreshold){
+  const sr = audioBuffer.sampleRate;
+  const channelData = [];
+  for(let c=0;c<audioBuffer.numberOfChannels;c++) channelData.push(audioBuffer.getChannelData(c));
+
+  const frameMs = 10; 
+  const frameLen = Math.floor(sr * (frameMs/1000));
+  const minSilenceFrames = Math.max(1, Math.floor((minSilenceSec*1000)/frameMs));
+
+  const frames = [];
+  for(let i=0;i<channelData[0].length;i+=frameLen){
+    const start = i;
+    const end = Math.min(i+frameLen, channelData[0].length);
+    frames.push(rms(channelData[0], start, end));
+  }
+
+  const isSilent = frames.map(v => v < rmsThreshold);
+  const keepRanges = [];
+  let cursorSample = 0;
+  let frameIndex=0;
+
+  while(frameIndex < isSilent.length){
+    if(isSilent[frameIndex]){
+      let j = frameIndex;
+      while(j < isSilent.length && isSilent[j]) j++;
+      const runLen = j - frameIndex;
+      if(runLen >= minSilenceFrames){
+        const silenceStartSample = frameIndex * frameLen;
+        if(silenceStartSample > cursorSample){
+          keepRanges.push([cursorSample, silenceStartSample]);
+        }
+        cursorSample = j * frameLen;
+      }
+      frameIndex = j;
+    } else {
+      frameIndex++;
+    }
+  }
+  if(cursorSample < channelData[0].length){
+    keepRanges.push([cursorSample, channelData[0].length]);
+  }
+  if(keepRanges.length === 0) return null;
+
+  let totalSamples = 0;
+  for(const r of keepRanges) totalSamples += (r[1]-r[0]);
+  const outChannels = [];
+  for(let c=0;c<channelData.length;c++) outChannels.push(new Float32Array(totalSamples));
+  let writePos = 0;
+  for(const r of keepRanges){
+    const [s,e] = r;
+    const len = e - s;
+    for(let c=0;c<channelData.length;c++){
+      outChannels[c].set(channelData[c].subarray(s,e), writePos);
+    }
+    writePos += len;
+  }
+  return {channels: outChannels, sampleRate: sr};
+}
+
+// VISUALIZATION LOGIC
+let audioCtx; 
+function setupVisualizer(audioElement, canvasId) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  const analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 256; 
+  
+  const source = audioCtx.createMediaElementSource(audioElement);
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+
+  function draw() {
+    requestAnimationFrame(draw);
+    analyser.getByteFrequencyData(dataArray);
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    const barWidth = (rect.width / bufferLength) * 2.5;
+    let barHeight;
+    let x = 0;
+
+    for(let i = 0; i < bufferLength; i++) {
+      barHeight = dataArray[i] / 2; 
+      const gradient = ctx.createLinearGradient(0, rect.height, 0, 0);
+      gradient.addColorStop(0, '#8b5cf6'); 
+      gradient.addColorStop(1, '#3b82f6'); 
+
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.roundRect(x, rect.height - barHeight, barWidth, barHeight, 5);
+      ctx.fill();
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = "rgba(59, 130, 246, 0.5)";
+
+      x += barWidth + 2; 
+    }
+  }
+  draw();
+}
+
+// UI HANDLERS
+const fileInput = document.getElementById('file');
+const processBtn = document.getElementById('process');
+const minSilenceEl = document.getElementById('minSilence');
+const thresholdEl = document.getElementById('threshold');
+const log = document.getElementById('log');
+const downloadLinkWav = document.getElementById('downloadLinkWav');
+const downloadLinkMp3 = document.getElementById('downloadLinkMp3');
+const audioOrig = document.getElementById('audioOrig');
+const audioOut = document.getElementById('audioOut');
+
+let visualizersInitialized = false;
+
+function initAudioContext() {
+  if (!visualizersInitialized) {
+    setupVisualizer(audioOrig, 'canvasOrig');
+    setupVisualizer(audioOut, 'canvasOut');
+    visualizersInitialized = true;
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+}
+
+document.body.addEventListener('click', initAudioContext);
+document.body.addEventListener('touchstart', initAudioContext);
+
+let latestResultBlob = null;
+let origURL = null;
+
+fileInput.addEventListener('change', ()=>{
+  const f = fileInput.files[0];
+  if(!f) return;
+  if(origURL) URL.revokeObjectURL(origURL);
+  origURL = URL.createObjectURL(f);
+  audioOrig.src = origURL;
+  log.innerHTML = '<small style="color:#fff">// Source loaded. Press Play to visualize.</small>';
+  downloadLinkWav.style.display = 'none';
+  downloadLinkMp3.style.display = 'none';
+});
+
+processBtn.addEventListener('click', async ()=>{
+  const f = fileInput.files[0];
+  if(!f){ alert('Please select a file first.'); return; }
+  
+  initAudioContext();
+  processBtn.disabled = true; processBtn.textContent = 'Processing...';
+  log.innerHTML = '<small>// Analyzing audio...</small>';
+
+  try {
+    const arrayBuffer = await readFileAsArrayBuffer(f);
+    const offlineCtx = new (window.OfflineAudioContext || window.webkitOfflineAudioContext)(1,1,44100);
+    const ac = new (window.AudioContext || window.webkitAudioContext)();
+    const decoded = await ac.decodeAudioData(arrayBuffer.slice(0));
+
+    log.innerHTML = `<small>// Info: ${decoded.sampleRate}Hz | ${decoded.duration.toFixed(2)}s</small>`;
+
+    const minSilence = parseFloat(minSilenceEl.value) || 0.0;
+    const rmsThreshold = parseFloat(thresholdEl.value) || 0.010;
+
+    log.innerHTML += '<br><small>// Removing silence...</small>';
+    const processed = await processBuffer(decoded, minSilence, rmsThreshold);
+    
+    if(!processed){ 
+      log.innerHTML += '<br><small style="color:#ef4444">// ERROR: Output empty.</small>'; 
+      processBtn.disabled=false; 
+      processBtn.textContent='Run Processor'; 
+      return; 
+    }
+
+    // 1. Generate WAV
+    const wavBlob = encodeWAV(processed.channels, processed.sampleRate);
+    const outURL = URL.createObjectURL(wavBlob);
+    audioOut.src = outURL;
+
+    downloadLinkWav.href = outURL;
+    downloadLinkWav.download = 'Processed_Audio.wav';
+    downloadLinkWav.style.display = 'inline-flex';
+
+    // 2. Generate MP3 (if library loaded)
+    if(window.lamejs) {
+        log.innerHTML += '<br><small>// Encoding MP3...</small>';
+        // Allow UI to update before heavy encoding
+        await new Promise(r => setTimeout(r, 50)); 
+        const mp3Blob = encodeMP3(processed.channels, processed.sampleRate);
+        if(mp3Blob) {
+            const mp3URL = URL.createObjectURL(mp3Blob);
+            downloadLinkMp3.href = mp3URL;
+            downloadLinkMp3.download = 'Processed_Audio.mp3';
+            downloadLinkMp3.style.display = 'inline-flex';
+        }
+    } else {
+        log.innerHTML += '<br><small style="color:orange">// MP3 Encoder library missing (Check Internet)</small>';
+    }
+
+    const sizeMB = (wavBlob.size/1024/1024).toFixed(2);
+    log.innerHTML += `<br><small style="color:#34d399">// SUCCESS. Size: ${sizeMB} MB</small>`;
+    
+  } catch(e) {
+    console.error(e);
+    log.innerHTML += `<br><small style="color:#ef4444">// ERROR: ${e.message}</small>`;
+  }
+
+  processBtn.disabled=false; processBtn.textContent='Run Processor';
+});
+</script>
+</body>
+</html>
+
+
