@@ -3,8 +3,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Silent Remover — MP3 Edition</title>
   
+  <!-- --- SEO META TAGS START (For Ranking) --- -->
+  <title>Free Online Audio Silence Remover - Remove Silence from MP3 & WAV Automatically</title>
+  <meta name="description" content="Use this Free AI Tool to automatically remove silent parts from MP3 and WAV audio files. Best online Silence Remover, Audio Trimmer, and Enhancer for podcasters and creators. No upload needed." />
+  <meta name="keywords" content="silence remover, remove silence from mp3, audio trimmer online, truncate silence, audio cleaner, mp3 cutter, podcast editor free, silence skipper, wav cleaner" />
+  <meta name="author" content="Deepak for Creator Help" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://your-website-domain.com/" />
+  
+  <!-- Social Media Tags (Open Graph) -->
+  <meta property="og:title" content="Silent Remover Pro - Auto Audio Cleaner" />
+  <meta property="og:description" content="Remove silence from audio instantly. Free online tool with no file upload. Works on MP3 & WAV." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-website-domain.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Schema Markup (Rich Snippet) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Silent Remover Pro",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "A free online browser-based tool to automatically detect and remove silence from audio files (MP3/WAV) without uploading data to a server.",
+    "featureList": "Auto Silence Removal, Audio Enhancement, Waveform Visualization, MP3 Export"
+  }
+  </script>
+  <!-- --- SEO META TAGS END --- -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
@@ -35,6 +68,27 @@
       align-items: center;
       position: relative;
     }
+
+    /* SEO Content Section Style */
+    .seo-content {
+      width: 90%;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .seo-content h1, .seo-content h2, .seo-content h3 {
+      color: white;
+      font-family: 'Space Grotesk', sans-serif;
+      margin-top: 20px;
+    }
+    .seo-content ul { padding-left: 20px; }
+    .seo-content li { margin-bottom: 10px; }
 
     /* Ambient Background */
     .ambient-light {
@@ -98,7 +152,7 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* ADSTERRA CONTAINER STYLE */
+    /* ADSTERRA CONTAINER */
     .ad-container {
         width: 100%;
         display: flex;
@@ -106,7 +160,7 @@
         align-items: center;
         margin: 20px 0;
         z-index: 5;
-        min-height: 90px; /* Placeholder height */
+        min-height: 90px;
     }
 
     /* Main Card */
@@ -372,13 +426,14 @@
   </div>
   <!-- ADS END -->
 
-  <div class="container">
+  <main class="container">
+    <h1 style="display:none;">Free Online Silence Remover for MP3 & WAV</h1>
     <div class="card">
       <h2>Silent Remover Pro</h2>
       <p class="subtitle">Next-Gen Audio Visualizer & Converter</p>
 
       <div class="file-upload-wrapper">
-        <label>Input Source File</label>
+        <label>Input Source File (MP3/WAV)</label>
         <input id="file" type="file" accept="audio/*" />
       </div>
 
@@ -416,7 +471,7 @@
       </div>
 
     </div>
-  </div>
+  </main>
 
   <!-- ADS 2 (LOWER) -->
   <div class="ad-container">
@@ -432,6 +487,28 @@
       <script type="text/javascript" src="//www.highperformanceformat.com/a1831c34d31150857ed77b25ba814d1f/invoke.js"></script>
   </div>
   <!-- ADS END -->
+
+  <!-- SEO CONTENT SECTION (Crucial for Ranking) -->
+  <article class="seo-content">
+    <h2>Best Free Online Silence Remover for MP3 and WAV</h2>
+    <p>Welcome to <strong>Silent Remover Pro</strong>, the ultimate free tool to automatically remove silent parts from your audio recordings. Whether you are editing a podcast, a lecture, or a voiceover, removing long pauses manually is time-consuming. Our AI-powered tool does it instantly in your browser.</p>
+    
+    <h3>Why Use Silent Remover Pro?</h3>
+    <ul>
+      <li><strong>100% Free & Secure:</strong> All processing happens in your browser. No files are uploaded to any server.</li>
+      <li><strong>Supports MP3 & WAV:</strong> Upload any audio format and download processed files in high quality.</li>
+      <li><strong>Custom Settings:</strong> Adjust silence sensitivity (Threshold) and duration to get perfect cuts.</li>
+      <li><strong>Instant Preview:</strong> Visualize your audio spectrum before and after processing.</li>
+    </ul>
+
+    <h3>How to Remove Silence from Audio?</h3>
+    <ol>
+      <li>Upload your audio file by clicking "Input Source File".</li>
+      <li>Set the "Min Silence" duration (e.g., 0.5s) to define how long a pause should be to get removed.</li>
+      <li>Adjust "Threshold" to detect background noise vs silence.</li>
+      <li>Click "Run Processor" and download your cleaned audio.</li>
+    </ol>
+  </article>
 
 <script>
 // --- CORE LOGIC ---
