@@ -648,8 +648,8 @@ processBtn.addEventListener('click', async ()=>{
 
     log.innerHTML = `<small>// Info: ${decoded.sampleRate}Hz | ${decoded.duration.toFixed(2)}s</small>`;
 
-    const minSilence = parseFloat(minSilenceEl.value) || 0.1;
-    const rmsThreshold = parseFloat(thresholdEl.value) || 0.04;
+    const minSilence = parseFloat(minSilenceEl.value) || 0.0;
+    const rmsThreshold = parseFloat(thresholdEl.value) || 0.010;
 
     log.innerHTML += '<br><small>// Removing silence...</small>';
     const processed = await processBuffer(decoded, minSilence, rmsThreshold);
