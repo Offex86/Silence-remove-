@@ -5,12 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   
   <!-- --- SEO META TAGS --- -->
-  <title>Free Online Audio Silence Remover - Remove Silence from MP3 & WAV Automatically</title>
-  <meta name="description" content="Use this Free AI Tool to automatically remove silent parts from MP3 and WAV audio files. Best online Silence Remover, Audio Trimmer, and Enhancer for podcasters and creators. No upload needed." />
+  <title>AI Silence Remove Website - Best Silent Part Remove Tool</title>
+  
+  <meta name="description" content="Use this Free Silence Remove Website to automatically remove silent parts from MP3 & WAV. The Best Silent Part Remove tool with AI Audio Enhancer." />
+  
+  <!-- Added Keywords for SEO -->
+  <meta name="keywords" content="Ai silence remove website, audio silenc part remove, silence remove part, free silence remove website, best silent part remove, automatic silence remover, audio trimmer online" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   
   <!-- GOOGLE ADSENSE SCRIPT -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8604461631146436"
@@ -19,19 +23,22 @@
   <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
   <style>
     :root {
-      --accent-primary: #3b82f6;
-      --accent-secondary: #8b5cf6;
-      --accent-glow: #60a5fa;
-      --bg-deep: #030712;
-      --glass-panel: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
+      --neon-cyan: #00f3ff;
+      --neon-purple: #bc13fe;
+      --bg-deep: #050505;
+      --panel-bg: rgba(10, 10, 16, 0.90);
+      --border-color: rgba(0, 243, 255, 0.2);
+      --text-main: #e0f7fa;
+      --text-muted: #56697a;
     }
     body {
       margin: 0;
       font-family: 'Space Grotesk', sans-serif;
       background-color: var(--bg-deep);
+      background-image: 
+        linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
       color: var(--text-main);
       overflow-x: hidden;
       min-height: 100vh;
@@ -40,41 +47,24 @@
       align-items: center;
       position: relative;
     }
-    /* Ambient Background */
-    .ambient-light {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -1;
-      overflow: hidden;
-      background: radial-gradient(circle at 50% 50%, #111 0%, #000 100%);
-    }
-    .blob {
-      position: absolute;
-      filter: blur(80px);
-      opacity: 0.4;
-      animation: float 20s infinite ease-in-out;
-    }
-    .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent-primary); animation-delay: 0s; }
-    .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: var(--accent-secondary); animation-delay: -5s; }
+
     /* Top Banner */
     .top-banner {
       width: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--glass-border);
-      padding: 12px 0;
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 1px solid var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+      padding: 10px 0;
       position: relative;
       z-index: 10;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
     }
     .marquee-container { overflow: hidden; white-space: nowrap; display: flex; align-items: center; }
     .marquee-content {
       display: inline-block; white-space: nowrap;
-      animation: scroll-left 25s linear infinite;
-      font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.85rem;
-      letter-spacing: 3px; color: #fff; text-transform: uppercase;
+      animation: scroll-left 30s linear infinite;
+      font-family: 'Orbitron', sans-serif; font-weight: 400; font-size: 0.75rem;
+      letter-spacing: 4px; color: var(--neon-cyan); text-transform: uppercase;
     }
-    .highlight { color: var(--accent-glow); text-shadow: 0 0 10px var(--accent-primary); }
     @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     
     /* AD CONTAINER */
@@ -85,7 +75,7 @@
         align-items: center;
         margin: 20px 0;
         z-index: 5;
-        min-height: 90px; /* Ensures space isn't collapsed if ad hasn't loaded */
+        min-height: 90px;
         overflow: hidden;
     }
     
@@ -99,113 +89,182 @@
       margin-bottom: 10px;
     }
     .card {
-      background: var(--glass-panel);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      padding: 40px;
-      box-shadow: 0 20px 50px -10px rgba(0,0,0,0.5);
+      background: var(--panel-bg);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 16px;
+      padding: 30px;
+      position: relative;
+      box-shadow: 0 20px 50px -10px rgba(0,0,0,0.8);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
+
+    /* FUTURISTIC BORDER */
+    .card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        z-index: -1;
+        border-radius: 18px;
+        background: linear-gradient(135deg, var(--neon-cyan), transparent 30%, transparent 70%, var(--neon-purple));
+        background-size: 200% 200%;
+        animation: border-flow 6s ease infinite;
+        opacity: 0.8;
+    }
+    .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        border-radius: 16px;
+        box-shadow: 0 0 40px rgba(0, 243, 255, 0.05); 
+    }
+    @keyframes border-flow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    /* TABS */
+    .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 15px;
+    }
+    .tab-btn {
+        background: rgba(0, 0, 0, 0.3);
+        color: var(--text-muted);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 12px 10px;
+        cursor: pointer;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 4px;
+        transition: all 0.3s;
+        flex: 1;
+        text-align: center;
+        clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+    .tab-btn.active {
+        background: rgba(0, 243, 255, 0.1);
+        color: var(--neon-cyan);
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+    }
+    .tab-content { display: none; animation: fadeIn 0.4s ease-out; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
     h2 {
-      font-family: 'Syncopate', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       text-align: center;
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       margin: 0 0 10px 0;
-      letter-spacing: 4px;
-      background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      color: #fff;
       text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
     }
     p.subtitle {
       text-align: center;
       color: var(--text-muted);
-      margin-bottom: 40px;
-      font-size: 0.9rem;
+      margin-bottom: 20px;
+      font-size: 0.75rem;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
+    
     /* Controls */
     label {
-      color: var(--accent-glow);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
+      color: var(--neon-cyan);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       display: block;
     }
-    .file-upload-wrapper { position: relative; margin-bottom: 30px; }
+    .file-upload-wrapper { position: relative; margin-bottom: 20px; }
     input[type="file"] {
-      width: 100%; padding: 20px; background: rgba(0,0,0,0.3);
-      border: 1px dashed var(--accent-secondary); border-radius: 12px;
+      width: 100%; padding: 15px; background: rgba(0,0,0,0.6);
+      border: 1px solid #333; border-radius: 8px;
       color: #fff; cursor: pointer; box-sizing: border-box;
       transition: all 0.3s ease; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
     }
-    input[type="file"]:hover { background: rgba(139, 92, 246, 0.1); border-color: var(--accent-glow); }
+    input[type="file"]:hover { border-color: var(--neon-purple); }
     input[type="file"]::file-selector-button {
-      background: var(--accent-primary); border: none; color: white;
-      padding: 8px 16px; border-radius: 6px; margin-right: 15px;
-      cursor: pointer; font-weight: 700; text-transform: uppercase;
+      background: #111; border: 1px solid var(--neon-cyan); color: var(--neon-cyan);
+      padding: 6px 12px; border-radius: 4px; margin-right: 10px;
+      cursor: pointer; font-weight: 700; text-transform: uppercase; font-family: 'Orbitron', sans-serif;
     }
-    .controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+    .controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
     .input-box {
-      background: rgba(0,0,0,0.2); padding: 20px; border-radius: 16px;
-      border: 1px solid var(--glass-border); transition: 0.3s;
+      background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px;
+      border: 1px solid #333;
     }
-    .input-box:hover { border-color: rgba(255,255,255,0.2); }
-    input[type="number"] {
+    input[type="number"], select {
       width: 100%; background: transparent; border: none;
-      border-bottom: 2px solid #334155; color: #fff;
-      font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem;
-      font-weight: 300; padding: 5px 0; outline: none; transition: 0.3s;
+      border-bottom: 1px solid #444; color: #fff;
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem;
+      padding: 5px 0; outline: none;
     }
-    input[type="number"]:focus { border-color: var(--accent-glow); }
-    small { color: #64748b; margin-top: 8px; display: block; font-size: 0.75rem; }
-    /* Buttons */
-    .action-area { margin-top: 40px; display: flex; gap: 15px; flex-wrap: wrap; }
-    button, .download-btn {
-      flex: 1; padding: 18px 24px; border: none; border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-      color: white; font-family: 'Space Grotesk', sans-serif; font-weight: 700;
-      font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px;
-      cursor: pointer; transition: all 0.4s; text-align: center; text-decoration: none;
-      box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
-      display: inline-flex; align-items: center; justify-content: center; min-width: 150px;
-    }
-    button:hover:not(:disabled), .download-btn:hover { transform: translateY(-4px) scale(1.02); }
-    button:disabled { background: #1e293b; color: #475569; cursor: not-allowed; box-shadow: none; transform: none; }
-    .download-btn { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4); display: none; }
-    .download-btn-mp3 { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.4); display: none; }
-    h4 { font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-top: 30px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-    #log { margin-top: 25px; padding: 15px; border-radius: 8px; background: #000; border: 1px solid #333; font-family: 'Courier New', monospace; color: #22c55e; font-size: 0.85rem; min-height: 20px; }
-    /* Visualizer */
-    .visualizer-container { margin-top: 20px; background: rgba(0,0,0,0.5); border-radius: 12px; padding: 15px; border: 1px solid var(--glass-border); }
-    canvas { width: 100%; height: 100px; display: block; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px; }
-    audio { width: 100%; height: 35px; opacity: 0.7; border-radius: 4px; filter: invert(1) hue-rotate(180deg); margin-top: 5px; }
+    select option { background: #000; color: #fff; }
     
-    .seo-content { width: 90%; max-width: 800px; margin: 40px auto; padding: 30px; background: rgba(0,0,0,0.4); border-radius: 16px; border: 1px solid var(--glass-border); color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; }
-    .seo-content h1, .seo-content h2, .seo-content h3 { color: white; font-family: 'Space Grotesk', sans-serif; margin-top: 20px; }
+    /* Buttons */
+    .action-area { margin-top: 30px; display: flex; gap: 10px; flex-wrap: wrap; }
+    button, .download-btn {
+      flex: 1; padding: 14px 20px; border: none; 
+      background: linear-gradient(90deg, #1a1a1a, #2a2a2a);
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan); 
+      font-family: 'Orbitron', sans-serif; font-weight: 700;
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; transition: all 0.3s; text-align: center; text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center; min-width: 120px;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+    button:hover:not(:disabled), .download-btn:hover { 
+        background: var(--neon-cyan); color: #000; box-shadow: 0 0 20px rgba(0, 243, 255, 0.4); 
+    }
+    button:disabled { background: #111; border-color: #333; color: #444; cursor: not-allowed; box-shadow: none; }
+    
+    .download-btn { border-color: var(--neon-purple); color: var(--neon-purple); display: none; }
+    .download-btn:hover { background: var(--neon-purple); color: #fff; }
+    .download-btn-mp3 { border-color: #f59e0b; color: #f59e0b; display: none; }
+    .download-btn-mp3:hover { background: #f59e0b; color: #000; }
+    
+    h4 { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: #fff; margin-top: 25px; text-transform: uppercase; letter-spacing: 2px; border-left: 3px solid var(--neon-cyan); padding-left: 10px; margin-bottom: 10px; }
+    .log-box { margin-top: 20px; padding: 12px; border-radius: 4px; background: #000; border: 1px solid #222; font-family: 'Courier New', monospace; color: var(--neon-cyan); font-size: 0.75rem; min-height: 20px; }
+    
+    /* Visualizer */
+    .visualizer-container { margin-top: 5px; background: rgba(0,0,0,0.6); border-radius: 8px; padding: 10px; border: 1px solid #222; }
+    canvas { width: 100%; height: 60px; display: block; border-bottom: 1px solid rgba(0, 243, 255, 0.1); margin-bottom: 5px; }
+    audio { width: 100%; height: 30px; opacity: 0.8; border-radius: 4px; filter: invert(1) hue-rotate(180deg); margin-top: 5px; }
+    
+    /* Hidden Result Section */
+    .result-section { display: none; animation: fadeIn 0.5s; }
+    
+    .seo-content { width: 90%; max-width: 800px; margin: 40px auto; padding: 30px; background: rgba(0,0,0,0.5); border-radius: 16px; border: 1px solid #222; color: #94a3b8; font-size: 0.9rem; line-height: 1.6; }
+    .seo-content h1, .seo-content h2, .seo-content h3 { color: #fff; font-family: 'Orbitron', sans-serif; margin-top: 20px; }
   </style>
 </head>
 <body>
-  <div class="ambient-light">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-  </div>
   <div class="top-banner">
     <div class="marquee-container">
       <div class="marquee-content">
-        <span class="highlight">MADE BY DEEPAK FOR CREATOR HELP</span> &nbsp; /// &nbsp; SYSTEM STATUS: OPTIMAL &nbsp; /// &nbsp; AI AUDIO ENGINE 2099 &nbsp; /// &nbsp; <span class="highlight">NO SERVER UPLOAD</span> &nbsp; /// &nbsp; INSTANT PROCESSING &nbsp; /// &nbsp; <span class="highlight">MADE BY DEEPAK FOR CREATOR HELP</span> &nbsp; /// &nbsp; SYSTEM STATUS: OPTIMAL &nbsp; /// &nbsp;
+        SYSTEM ONLINE &nbsp; /// &nbsp; AUDIO PROCESSING UNIT &nbsp; /// &nbsp; NO DATA UPLOADED &nbsp; /// &nbsp; SECURE CONNECTION &nbsp; /// &nbsp; AI ENGINE READY &nbsp; /// &nbsp;
       </div>
     </div>
   </div>
 
-  <!-- ADS 1 (UPPER) - REPLACED WITH ADSENSE -->
+  <!-- ADS 1 (UPPER) -->
   <div class="ad-container">
-     <!-- Google AdSense Unit -->
-     <!-- IMPORTANT: Replace data-ad-slot value below with your actual AdSense Unit ID -->
      <ins class="adsbygoogle"
           style="display:block"
           data-ad-client="ca-pub-8604461631146436"
@@ -219,50 +278,124 @@
   <!-- ADS END -->
 
   <main class="container">
-    <h1 style="display:none;">Free Online Silence Remover for MP3 & WAV</h1>
+    <h1 style="display:none;">Ai silence remove website - Best silent part remove Tool</h1>
     <div class="card">
-      <h2>Silent Remover Pro</h2>
-      <p class="subtitle">Next-Gen Audio Visualizer & Converter</p>
-      <div class="file-upload-wrapper">
-        <label>Input Source File (MP3/WAV)</label>
-        <input id="file" type="file" accept="audio/*" />
-      </div>
-      <div class="controls-grid">
-        <div class="input-box">
-          <label>Min Silence (Sec)</label>
-          <input id="minSilence" type="number" step="0.05" value="0.1" min="0.0" />
-          <small>Duration to be cut (e.g. 0.1)</small>
+        
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('silence')">Silence Remover</button>
+            <button class="tab-btn" onclick="switchTab('enhance')">Audio Enhancer</button>
         </div>
-        <div class="input-box">
-          <label>Threshold (RMS)</label>
-          <input id="threshold" type="number" step="0.0" value="0.010" min="0.00001" />
-          <small>Sensitivity (Lower = More Sensitive)</small>
+
+        <!-- TAB 1: SILENCE REMOVER -->
+        <div id="tab-silence" class="tab-content active">
+            <h2>Silent Remover Pro</h2>
+            <p class="subtitle">Remove Dead Air & Silence Automatically</p>
+            <div class="file-upload-wrapper">
+                <label>Input Source File (MP3/WAV)</label>
+                <input id="fileSilence" type="file" accept="audio/*" />
+            </div>
+            
+            <!-- ORIGINAL AUDIO PLAYER -->
+            <div id="silenceOriginalSection" style="display:none;">
+                <h4>Original Audio (Before)</h4>
+                <div class="visualizer-container">
+                    <audio id="audioSilenceIn" controls crossorigin="anonymous"></audio>
+                </div>
+            </div>
+
+            <div class="controls-grid" style="margin-top:20px;">
+                <div class="input-box">
+                    <label>Min Silence (Sec)</label>
+                    <input id="minSilence" type="number" step="0.05" value="0.1" min="0.0" />
+                    <small>Duration to be cut</small>
+                </div>
+                <div class="input-box">
+                    <label>Threshold (RMS)</label>
+                    <input id="threshold" type="number" step="0.0" value="0.010" min="0.00001" />
+                    <small>Sensitivity</small>
+                </div>
+            </div>
+            <div class="action-area">
+                <button id="processSilence">INITIALIZE CUT</button>
+            </div>
+            <div id="logSilence" class="log-box"><small>> AWAITING INPUT...</small></div>
+            
+            <!-- RESULT AUDIO PLAYER -->
+            <div id="silenceResultSection" class="result-section">
+                <h4>Processed Voice (Result)</h4>
+                <div class="visualizer-container">
+                    <canvas id="canvasSilence"></canvas>
+                    <audio id="audioSilenceOut" controls crossorigin="anonymous"></audio>
+                </div>
+                <div class="action-area" style="margin-top:10px;">
+                    <a id="dlSilenceWav" class="download-btn">SAVE WAV</a>
+                    <a id="dlSilenceMp3" class="download-btn download-btn-mp3">SAVE MP3</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="action-area">
-        <button id="process">Run Processor</button>
-        <a id="downloadLinkWav" class="download-btn">Download WAV</a>
-        <a id="downloadLinkMp3" class="download-btn download-btn-mp3">Download MP3</a>
-      </div>
-      <div id="log"><small>// System Ready...</small></div>
-      <h4>Original Audio Spectrum</h4>
-      <div class="visualizer-container">
-        <canvas id="canvasOrig"></canvas>
-        <audio id="audioOrig" controls crossorigin="anonymous"></audio>
-      </div>
-      
-      <h4>Processed Output</h4>
-      <div class="visualizer-container">
-        <canvas id="canvasOut"></canvas>
-        <audio id="audioOut" controls crossorigin="anonymous"></audio>
-      </div>
+
+        <!-- TAB 2: AUDIO ENHANCER -->
+        <div id="tab-enhance" class="tab-content">
+            <h2>Lexis Enhancer Pro</h2>
+            <p class="subtitle">Target: V-Shape EQ (Bass/Treble Boost)</p>
+            <div class="file-upload-wrapper">
+                <label>Input Source File (MP3/WAV)</label>
+                <input id="fileEnhance" type="file" accept="audio/*" />
+            </div>
+
+            <!-- ORIGINAL AUDIO PLAYER -->
+            <div id="enhanceOriginalSection" style="display:none;">
+                <h4>Original Audio (Before)</h4>
+                <div class="visualizer-container">
+                    <audio id="audioEnhanceIn" controls crossorigin="anonymous"></audio>
+                </div>
+            </div>
+
+            <div class="controls-grid" style="margin-top:20px;">
+                <div class="input-box">
+                    <label>Preset Style</label>
+                    <select id="enhanceType">
+                        <option value="lexis" selected>Lexis Default (V-Shape)</option>
+                        <option value="voice">Voice Only (Vocal Boost)</option>
+                        <option value="flat">Flat (Compression Only)</option>
+                    </select>
+                    <small>EQ Config: +9dB Bass/Treble</small>
+                </div>
+                <div class="input-box">
+                    <label>Intensity</label>
+                    <select id="enhanceIntensity">
+                        <option value="0.8">Soft</option>
+                        <option value="1.0" selected>Standard (Default)</option>
+                        <option value="1.2">Strong</option>
+                    </select>
+                    <small>Signal Processing Strength</small>
+                </div>
+            </div>
+            <div class="action-area">
+                <button id="processEnhance">ENGAGE ENHANCER</button>
+            </div>
+            <div id="logEnhance" class="log-box"><small>> AWAITING INPUT...</small></div>
+            
+            <!-- RESULT AUDIO PLAYER -->
+            <div id="enhanceResultSection" class="result-section">
+                <h4>Processed Voice (Result)</h4>
+                <div class="visualizer-container">
+                    <canvas id="canvasEnhance"></canvas>
+                    <audio id="audioEnhanceOut" controls crossorigin="anonymous"></audio>
+                </div>
+                <div class="action-area" style="margin-top:10px;">
+                    <a id="dlEnhanceWav" class="download-btn">SAVE WAV</a>
+                    <a id="dlEnhanceMp3" class="download-btn download-btn-mp3">SAVE MP3</a>
+                </div>
+            </div>
+        </div>
+
     </div>
   </main>
 
-  <!-- ADS 2 (LOWER) - REPLACED WITH ADSENSE -->
+  <!-- ADS 2 (LOWER) -->
   <div class="ad-container">
-     <!-- Google AdSense Unit -->
-     <!-- IMPORTANT: Replace data-ad-slot value below with your actual AdSense Unit ID -->
      <ins class="adsbygoogle"
           style="display:block"
           data-ad-client="ca-pub-8604461631146436"
@@ -276,34 +409,23 @@
   <!-- ADS END -->
 
   <article class="seo-content">
-    <h2>Best Free Online Silence Remover for MP3 and WAV</h2>
-    <p>Welcome to <strong>Silent Remover Pro</strong>, the ultimate free tool to automatically remove silent parts from your audio recordings. Whether you are editing a podcast, a lecture, or a voiceover, removing long pauses manually is time-consuming. Our AI-powered tool does it instantly in your browser.</p>
-    
-    <h3>Why Use Silent Remover Pro?</h3>
+    <h2>Best Free Online Silence Remover and Audio Enhancer</h2>
+    <p>Welcome to <strong>Audio Tool Pro</strong>. If you are looking for an <strong>Ai silence remove website</strong>, you have found the right place. Our tools run locally in your browser for maximum privacy.</p>
     <ul>
-      <li><strong>100% Free & Secure:</strong> All processing happens in your browser. No files are uploaded to any server.</li>
-      <li><strong>Supports MP3 & WAV:</strong> Upload any audio format and download processed files in high quality.</li>
-      <li><strong>Custom Settings:</strong> Adjust silence sensitivity (Threshold) and duration to get perfect cuts.</li>
-      <li><strong>Instant Preview:</strong> Visualize your audio spectrum before and after processing.</li>
+        <li><strong>Audio silence part remove:</strong> Use our smart algorithm to automatically find and remove silence parts.</li>
+        <li><strong>Best silent part remove:</strong> We provide the best silent part remove experience with instant previews.</li>
+        <li><strong>Free silence remove website:</strong> This tool is 100% free forever. No upload limits.</li>
+        <li><strong>Lexis Style Enhancer:</strong> Apply professional EQ and Compression in one click.</li>
     </ul>
-    <h3>How to Remove Silence from Audio?</h3>
-    <ol>
-      <li>Upload your audio file by clicking "Input Source File".</li>
-      <li>Set the "Min Silence" duration (e.g., 0.5s) to define how long a pause should be to get removed.</li>
-      <li>Adjust "Threshold" to detect background noise vs silence.</li>
-      <li>Click "Run Processor" and download your cleaned audio.</li>
-    </ol>
+    <p>Whether you need to perform an <strong>audio silenc part remove</strong> or just enhance quality, our AI-powered tools help you achieve studio results instantly.</p>
   </article>
+
 <script>
-// --- CORE LOGIC ---
+// --- CORE UTILS ---
 async function readFileAsArrayBuffer(file){
   return await file.arrayBuffer();
 }
-function rms(buffer, start, end){
-  let sum=0, cnt=0;
-  for(let i=start;i<end;i++){ const v=buffer[i]; sum+=v*v; cnt++; }
-  return Math.sqrt(sum / Math.max(cnt,1));
-}
+
 // WAV Encoder
 function encodeWAV(buffers, sampleRate){
   const numChannels = buffers.length;
@@ -334,13 +456,11 @@ function encodeWAV(buffers, sampleRate){
   }
   return new Blob([view], {type:'audio/wav'});
 }
-// MP3 Encoder using LAMEJS
+
+// MP3 Encoder
 function encodeMP3(channels, sampleRate) {
-  if (!window.lamejs) {
-    console.error("Lamejs not loaded");
-    return null;
-  }
-  const mp3encoder = new lamejs.Mp3Encoder(channels.length, sampleRate, 128); // 128kbps MP3
+  if (!window.lamejs) return null;
+  const mp3encoder = new lamejs.Mp3Encoder(channels.length, sampleRate, 128);
   const mp3Data = [];
   const left = channels[0];
   const right = channels.length > 1 ? channels[1] : channels[0];
@@ -358,69 +478,17 @@ function encodeMP3(channels, sampleRate) {
     const mp3buf = mp3encoder.encodeBuffer(leftChunk, rightChunk);
     if (mp3buf.length > 0) mp3Data.push(mp3buf);
   }
-  
   const mp3buf = mp3encoder.flush();
   if (mp3buf.length > 0) mp3Data.push(mp3buf);
   return new Blob(mp3Data, { type: 'audio/mp3' });
 }
-async function processBuffer(audioBuffer, minSilenceSec, rmsThreshold){
-  const sr = audioBuffer.sampleRate;
-  const channelData = [];
-  for(let c=0;c<audioBuffer.numberOfChannels;c++) channelData.push(audioBuffer.getChannelData(c));
-  const frameMs = 10; 
-  const frameLen = Math.floor(sr * (frameMs/1000));
-  const minSilenceFrames = Math.max(1, Math.floor((minSilenceSec*1000)/frameMs));
-  const frames = [];
-  for(let i=0;i<channelData[0].length;i+=frameLen){
-    const start = i;
-    const end = Math.min(i+frameLen, channelData[0].length);
-    frames.push(rms(channelData[0], start, end));
-  }
-  const isSilent = frames.map(v => v < rmsThreshold);
-  const keepRanges = [];
-  let cursorSample = 0;
-  let frameIndex=0;
-  while(frameIndex < isSilent.length){
-    if(isSilent[frameIndex]){
-      let j = frameIndex;
-      while(j < isSilent.length && isSilent[j]) j++;
-      const runLen = j - frameIndex;
-      if(runLen >= minSilenceFrames){
-        const silenceStartSample = frameIndex * frameLen;
-        if(silenceStartSample > cursorSample){
-          keepRanges.push([cursorSample, silenceStartSample]);
-        }
-        cursorSample = j * frameLen;
-      }
-      frameIndex = j;
-    } else {
-      frameIndex++;
-    }
-  }
-  if(cursorSample < channelData[0].length){
-    keepRanges.push([cursorSample, channelData[0].length]);
-  }
-  if(keepRanges.length === 0) return null;
-  let totalSamples = 0;
-  for(const r of keepRanges) totalSamples += (r[1]-r[0]);
-  const outChannels = [];
-  for(let c=0;c<channelData.length;c++) outChannels.push(new Float32Array(totalSamples));
-  let writePos = 0;
-  for(const r of keepRanges){
-    const [s,e] = r;
-    const len = e - s;
-    for(let c=0;c<channelData.length;c++){
-      outChannels[c].set(channelData[c].subarray(s,e), writePos);
-    }
-    writePos += len;
-  }
-  return {channels: outChannels, sampleRate: sr};
-}
+
+// --- VISUALIZER ---
 let audioCtx; 
 function setupVisualizer(audioElement, canvasId) {
   const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
   const ctx = canvas.getContext('2d');
-  
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
   canvas.width = rect.width * dpr;
@@ -430,9 +498,14 @@ function setupVisualizer(audioElement, canvasId) {
   const analyser = audioCtx.createAnalyser();
   analyser.fftSize = 256; 
   
-  const source = audioCtx.createMediaElementSource(audioElement);
-  source.connect(analyser);
-  analyser.connect(audioCtx.destination);
+  try {
+      const source = audioCtx.createMediaElementSource(audioElement);
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+  } catch(e) {
+      // Already connected
+  }
+
   const bufferLength = analyser.frequencyBinCount;
   const dataArray = new Uint8Array(bufferLength);
   function draw() {
@@ -445,8 +518,8 @@ function setupVisualizer(audioElement, canvasId) {
     for(let i = 0; i < bufferLength; i++) {
       barHeight = dataArray[i] / 2; 
       const gradient = ctx.createLinearGradient(0, rect.height, 0, 0);
-      gradient.addColorStop(0, '#8b5cf6'); 
-      gradient.addColorStop(1, '#3b82f6'); 
+      gradient.addColorStop(0, '#00f3ff'); 
+      gradient.addColorStop(1, '#bc13fe'); 
       ctx.fillStyle = gradient;
       ctx.beginPath();
       ctx.roundRect(x, rect.height - barHeight, barWidth, barHeight, 5);
@@ -456,92 +529,252 @@ function setupVisualizer(audioElement, canvasId) {
   }
   draw();
 }
-const fileInput = document.getElementById('file');
-const processBtn = document.getElementById('process');
-const minSilenceEl = document.getElementById('minSilence');
-const thresholdEl = document.getElementById('threshold');
-const log = document.getElementById('log');
-const downloadLinkWav = document.getElementById('downloadLinkWav');
-const downloadLinkMp3 = document.getElementById('downloadLinkMp3');
-const audioOrig = document.getElementById('audioOrig');
-const audioOut = document.getElementById('audioOut');
-let visualizersInitialized = false;
-// --- FILE NAME FIX ---
-let originalFileName = "Audio"; // Default name
-function initAudioContext() {
-  if (!visualizersInitialized) {
-    setupVisualizer(audioOrig, 'canvasOrig');
-    setupVisualizer(audioOut, 'canvasOut');
-    visualizersInitialized = true;
-  }
-  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+
+// --- TAB SYSTEM ---
+function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelector(`#tab-${tab}`).classList.add('active');
+    event.target.classList.add('active');
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
 }
-document.body.addEventListener('click', initAudioContext);
-document.body.addEventListener('touchstart', initAudioContext);
-let origURL = null;
-fileInput.addEventListener('change', ()=>{
-  const f = fileInput.files[0];
-  if(!f) return;
-  
-  // CAPTURE ORIGINAL NAME WITHOUT EXTENSION
-  originalFileName = f.name.replace(/\.[^/.]+$/, "");
-  
-  if(origURL) URL.revokeObjectURL(origURL);
-  origURL = URL.createObjectURL(f);
-  audioOrig.src = origURL;
-  log.innerHTML = '<small style="color:#fff">// Source loaded. Press Play to visualize.</small>';
-  downloadLinkWav.style.display = 'none';
-  downloadLinkMp3.style.display = 'none';
+
+// --- LOGIC: SILENCE REMOVER ---
+const fileSilence = document.getElementById('fileSilence');
+const processSilenceBtn = document.getElementById('processSilence');
+const logSilence = document.getElementById('logSilence');
+const audioSilenceOut = document.getElementById('audioSilenceOut');
+const audioSilenceIn = document.getElementById('audioSilenceIn');
+const silenceOriginalSection = document.getElementById('silenceOriginalSection');
+const silenceResultSection = document.getElementById('silenceResultSection');
+let silenceFileName = "Audio";
+
+fileSilence.addEventListener('change', ()=>{
+    const f = fileSilence.files[0];
+    if(!f) return;
+    silenceFileName = f.name.replace(/\.[^/.]+$/, "");
+    
+    // PLAY ORIGINAL FILE IMMEDIATELY
+    audioSilenceIn.src = URL.createObjectURL(f);
+    silenceOriginalSection.style.display = 'block';
+    
+    logSilence.innerHTML = '<small style="color:#00f3ff">> SOURCE FILE LOADED.</small>';
+    silenceResultSection.style.display = 'none';
+    document.getElementById('dlSilenceWav').style.display='none';
+    document.getElementById('dlSilenceMp3').style.display='none';
 });
-processBtn.addEventListener('click', async ()=>{
-  const f = fileInput.files[0];
-  if(!f){ alert('Please select a file first.'); return; }
-  initAudioContext();
-  processBtn.disabled = true; processBtn.textContent = 'Processing...';
-  log.innerHTML = '<small>// Analyzing audio...</small>';
-  try {
-    const arrayBuffer = await readFileAsArrayBuffer(f);
-    const ac = new (window.AudioContext || window.webkitAudioContext)();
-    const decoded = await ac.decodeAudioData(arrayBuffer.slice(0));
-    log.innerHTML = `<small>// Info: ${decoded.sampleRate}Hz | ${decoded.duration.toFixed(2)}s</small>`;
-    const minSilence = parseFloat(minSilenceEl.value) || 0.0;
-    const rmsThreshold = parseFloat(thresholdEl.value) || 0.010;
-    log.innerHTML += '<br><small>// Removing silence...</small>';
-    const processed = await processBuffer(decoded, minSilence, rmsThreshold);
-    if(!processed){ 
-      log.innerHTML += '<br><small style="color:#ef4444">// ERROR: Output empty.</small>'; 
-      processBtn.disabled=false; processBtn.textContent='Run Processor'; return; 
-    }
-    const wavBlob = encodeWAV(processed.channels, processed.sampleRate);
-    const outURL = URL.createObjectURL(wavBlob);
-    audioOut.src = outURL;
+
+processSilenceBtn.addEventListener('click', async ()=>{
+    const f = fileSilence.files[0];
+    if(!f){ alert('Please upload a file.'); return; }
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     
-    // SET FILENAME FOR WAV
-    downloadLinkWav.href = outURL;
-    downloadLinkWav.download = `${originalFileName}_Cleaned.wav`;
-    downloadLinkWav.style.display = 'inline-flex';
+    processSilenceBtn.disabled=true; processSilenceBtn.textContent='PROCESSING...';
+    logSilence.innerHTML = '<small>> ANALYZING WAVEFORM...</small>';
     
-    if(window.lamejs) {
-        log.innerHTML += '<br><small>// Encoding MP3...</small>';
-        await new Promise(r => setTimeout(r, 50)); 
-        const mp3Blob = encodeMP3(processed.channels, processed.sampleRate);
-        if(mp3Blob) {
-            const mp3URL = URL.createObjectURL(mp3Blob);
-            // SET FILENAME FOR MP3
-            downloadLinkMp3.href = mp3URL;
-            downloadLinkMp3.download = `${originalFileName}_Cleaned.mp3`;
-            downloadLinkMp3.style.display = 'inline-flex';
+    try {
+        const ab = await readFileAsArrayBuffer(f);
+        const decoded = await audioCtx.decodeAudioData(ab.slice(0));
+        
+        const minSilenceSec = parseFloat(document.getElementById('minSilence').value);
+        const rmsThresh = parseFloat(document.getElementById('threshold').value);
+        
+        const sr = decoded.sampleRate;
+        const channelData = [];
+        for(let c=0;c<decoded.numberOfChannels;c++) channelData.push(decoded.getChannelData(c));
+        const frameMs = 10;
+        const frameLen = Math.floor(sr*(frameMs/1000));
+        const minFrames = Math.max(1, Math.floor((minSilenceSec*1000)/frameMs));
+        
+        function getRms(b,s,e){let sum=0;let cnt=0;for(let i=s;i<e;i++){sum+=b[i]*b[i];cnt++;}return Math.sqrt(sum/Math.max(cnt,1));}
+        
+        const frames=[];
+        for(let i=0;i<channelData[0].length;i+=frameLen){
+            frames.push(getRms(channelData[0],i,Math.min(i+frameLen,channelData[0].length)));
         }
+        const isSilent=frames.map(v=>v<rmsThresh);
+        const ranges=[];
+        let cur=0, fIdx=0;
+        while(fIdx<isSilent.length){
+            if(isSilent[fIdx]){
+                let j=fIdx;
+                while(j<isSilent.length && isSilent[j]) j++;
+                if((j-fIdx)>=minFrames){
+                    const silStart=fIdx*frameLen;
+                    if(silStart>cur) ranges.push([cur, silStart]);
+                    cur=j*frameLen;
+                }
+                fIdx=j;
+            }else{fIdx++;}
+        }
+        if(cur<channelData[0].length) ranges.push([cur, channelData[0].length]);
+        
+        if(ranges.length===0){ throw new Error("Result Empty"); }
+        
+        let totalLen=0;
+        ranges.forEach(r=>totalLen+=(r[1]-r[0]));
+        const outCh=[];
+        for(let c=0;c<channelData.length;c++) outCh.push(new Float32Array(totalLen));
+        let wPos=0;
+        ranges.forEach(r=>{
+            const l=r[1]-r[0];
+            for(let c=0;c<channelData.length;c++) outCh[c].set(channelData[c].subarray(r[0],r[1]), wPos);
+            wPos+=l;
+        });
+        
+        const wav = encodeWAV(outCh, sr);
+        const url = URL.createObjectURL(wav);
+        
+        // SHOW RESULT
+        silenceResultSection.style.display = 'block';
+        audioSilenceOut.src=url;
+        setupVisualizer(audioSilenceOut, 'canvasSilence');
+        
+        const dlWav = document.getElementById('dlSilenceWav');
+        dlWav.href=url; dlWav.download = `${silenceFileName}_Cleaned.wav`; dlWav.style.display='inline-flex';
+        
+        if(window.lamejs){
+             const mp3 = encodeMP3(outCh, sr);
+             if(mp3){
+                 const mUrl = URL.createObjectURL(mp3);
+                 const dlMp3 = document.getElementById('dlSilenceMp3');
+                 dlMp3.href=mUrl; dlMp3.download=`${silenceFileName}_Cleaned.mp3`; dlMp3.style.display='inline-flex';
+             }
+        }
+        logSilence.innerHTML += `<br><small style="color:#00f3ff">> SUCCESS. REMOVED ${(decoded.duration - (totalLen/sr)).toFixed(2)}s</small>`;
+        
+    } catch(e) {
+        logSilence.innerHTML += `<br><small style="color:#ef4444">// ERROR: ${e.message}</small>`;
     }
-    const sizeMB = (wavBlob.size/1024/1024).toFixed(2);
-    log.innerHTML += `<br><small style="color:#34d399">// SUCCESS. Size: ${sizeMB} MB</small>`;
-  } catch(e) {
-    console.error(e);
-    log.innerHTML += `<br><small style="color:#ef4444">// ERROR: ${e.message}</small>`;
-  }
-  processBtn.disabled=false; processBtn.textContent='Run Processor';
+    processSilenceBtn.disabled=false; processSilenceBtn.textContent='INITIALIZE CUT';
+});
+
+// --- LOGIC: AUDIO ENHANCER (LEXIS STYLE EQ) ---
+const fileEnhance = document.getElementById('fileEnhance');
+const processEnhanceBtn = document.getElementById('processEnhance');
+const logEnhance = document.getElementById('logEnhance');
+const audioEnhanceOut = document.getElementById('audioEnhanceOut');
+const audioEnhanceIn = document.getElementById('audioEnhanceIn');
+const enhanceOriginalSection = document.getElementById('enhanceOriginalSection');
+const enhanceResultSection = document.getElementById('enhanceResultSection');
+let enhanceFileName = "Audio";
+
+fileEnhance.addEventListener('change', ()=>{
+    const f = fileEnhance.files[0];
+    if(!f) return;
+    enhanceFileName = f.name.replace(/\.[^/.]+$/, "");
+    
+    // PLAY ORIGINAL
+    audioEnhanceIn.src = URL.createObjectURL(f);
+    enhanceOriginalSection.style.display = 'block';
+    
+    logEnhance.innerHTML = '<small style="color:#00f3ff">> AUDIO BUFFERED.</small>';
+    enhanceResultSection.style.display = 'none';
+    document.getElementById('dlEnhanceWav').style.display='none';
+    document.getElementById('dlEnhanceMp3').style.display='none';
+});
+
+processEnhanceBtn.addEventListener('click', async ()=>{
+    const f = fileEnhance.files[0];
+    if(!f){ alert('Please upload a file.'); return; }
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    processEnhanceBtn.disabled=true; processEnhanceBtn.textContent='ENHANCING...';
+    logEnhance.innerHTML = '<small>> APPLYING EQ FILTERS...</small>';
+    
+    try {
+        const ab = await readFileAsArrayBuffer(f);
+        const decoded = await audioCtx.decodeAudioData(ab.slice(0));
+        
+        const type = document.getElementById('enhanceType').value;
+        const intensity = parseFloat(document.getElementById('enhanceIntensity').value);
+
+        const offlineCtx = new OfflineAudioContext(decoded.numberOfChannels, decoded.length, decoded.sampleRate);
+        const source = offlineCtx.createBufferSource();
+        source.buffer = decoded;
+        
+        // --- 10-BAND EQ CHAIN ---
+        let currentNode = source;
+        function addFilter(freq, gain, type='peaking', Q=1.0){
+            const node = offlineCtx.createBiquadFilter();
+            node.type = type;
+            node.frequency.value = freq;
+            node.gain.value = gain * intensity;
+            node.Q.value = Q;
+            currentNode.connect(node);
+            currentNode = node;
+        }
+
+        if(type === 'lexis') {
+            // "V-Shape" EQ based on user screenshot
+            addFilter(32, 9.0, 'lowshelf'); // +9dB Bass
+            addFilter(62, 5.0, 'peaking');  
+            addFilter(125, 2.0, 'peaking'); 
+            
+            // Highs (Boosted)
+            addFilter(8000, 4.0, 'peaking');  
+            addFilter(16000, 9.0, 'highshelf');// +9dB Air
+        } 
+        else if(type === 'voice') {
+            addFilter(80, -10.0, 'highpass'); 
+            addFilter(300, -2.0); 
+            addFilter(3000, 4.0); 
+            addFilter(10000, 2.0, 'highshelf'); 
+        }
+
+        // COMPRESSOR
+        const compressor = offlineCtx.createDynamicsCompressor();
+        compressor.threshold.value = -20;
+        compressor.knee.value = 30;
+        compressor.ratio.value = 4;
+        compressor.attack.value = 0.003;
+        compressor.release.value = 0.25;
+        currentNode.connect(compressor);
+        currentNode = compressor;
+
+        // GAIN
+        const gainNode = offlineCtx.createGain();
+        gainNode.gain.value = 1.5; 
+        currentNode.connect(gainNode);
+        currentNode = gainNode;
+
+        currentNode.connect(offlineCtx.destination);
+        source.start();
+        
+        const renderedBuffer = await offlineCtx.startRendering();
+        
+        const outCh = [];
+        for(let c=0;c<renderedBuffer.numberOfChannels;c++) outCh.push(renderedBuffer.getChannelData(c));
+        
+        const wav = encodeWAV(outCh, renderedBuffer.sampleRate);
+        const url = URL.createObjectURL(wav);
+        
+        // SHOW RESULT
+        enhanceResultSection.style.display = 'block';
+        audioEnhanceOut.src=url;
+        setupVisualizer(audioEnhanceOut, 'canvasEnhance');
+        
+        const dlWav = document.getElementById('dlEnhanceWav');
+        dlWav.href=url; dlWav.download = `${enhanceFileName}_LexisEnhance.wav`; dlWav.style.display='inline-flex';
+        
+        if(window.lamejs){
+             const mp3 = encodeMP3(outCh, renderedBuffer.sampleRate);
+             if(mp3){
+                 const mUrl = URL.createObjectURL(mp3);
+                 const dlMp3 = document.getElementById('dlEnhanceMp3');
+                 dlMp3.href=mUrl; dlMp3.download=`${enhanceFileName}_LexisEnhance.mp3`; dlMp3.style.display='inline-flex';
+             }
+        }
+        logEnhance.innerHTML += `<br><small style="color:#00f3ff">> ENHANCEMENT COMPLETE.</small>`;
+
+    } catch(e) {
+        console.error(e);
+        logEnhance.innerHTML += `<br><small style="color:#ef4444">// ERROR: ${e.message}</small>`;
+    }
+    processEnhanceBtn.disabled=false; processEnhanceBtn.textContent='ENGAGE ENHANCER';
 });
 </script>
 </body>
 </html>
+
 
