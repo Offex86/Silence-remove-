@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   
-  <!-- --- SEO META TAGS --- -->
   <title>AI Silence Remove Website - Best Silent Part Remove Tool</title>
   
   <meta name="description" content="Use this Free Silence Remove Website to automatically remove silent parts from MP3 & WAV. The Best Silent Part Remove tool with AI Audio Enhancer." />
@@ -251,6 +250,9 @@
   </style>
 </head>
 <body>
+
+  <script async="async" data-cfasync="false" src="https://pl28294546.effectivegatecpm.com/1dce27edec2a3fa40fc3c1ae0f45236a/invoke.js"></script>
+  <div id="container-1dce27edec2a3fa40fc3c1ae0f45236a"></div>
   <div class="top-banner">
     <div class="marquee-container">
       <div class="marquee-content">
@@ -259,7 +261,6 @@
     </div>
   </div>
 
-  <!-- ADS 1 (UPPER) - ADSTERRA -->
   <div class="ad-container">
     <iframe class="ad-frame"
       title="Advertisement"
@@ -286,19 +287,15 @@
       ">
     </iframe>
   </div>
-  <!-- ADS END -->
-
   <main class="container">
     <h1 style="display:none;">Ai silence remove website - Best silent part remove Tool</h1>
     <div class="card">
         
-        <!-- TABS -->
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('silence')">Silence Remover</button>
             <button class="tab-btn" onclick="switchTab('enhance')">Audio Enhancer</button>
         </div>
 
-        <!-- TAB 1: SILENCE REMOVER -->
         <div id="tab-silence" class="tab-content active">
             <h2>Silent Remover Pro</h2>
             <p class="subtitle">Remove Dead Air & Silence Automatically</p>
@@ -307,7 +304,6 @@
                 <input id="fileSilence" type="file" accept="audio/*" />
             </div>
             
-            <!-- ORIGINAL AUDIO PLAYER -->
             <div id="silenceOriginalSection" style="display:none;">
                 <h4>Original Audio (Before)</h4>
                 <div class="visualizer-container">
@@ -332,7 +328,6 @@
             </div>
             <div id="logSilence" class="log-box"><small>> AWAITING INPUT...</small></div>
             
-            <!-- RESULT AUDIO PLAYER -->
             <div id="silenceResultSection" class="result-section">
                 <h4>Processed Voice (Result)</h4>
                 <div class="visualizer-container">
@@ -346,7 +341,6 @@
             </div>
         </div>
 
-        <!-- TAB 2: AUDIO ENHANCER -->
         <div id="tab-enhance" class="tab-content">
             <h2>Lexis Enhancer Pro</h2>
             <p class="subtitle">Target: V-Shape EQ (Bass/Treble Boost)</p>
@@ -355,7 +349,6 @@
                 <input id="fileEnhance" type="file" accept="audio/*" />
             </div>
 
-            <!-- ORIGINAL AUDIO PLAYER -->
             <div id="enhanceOriginalSection" style="display:none;">
                 <h4>Original Audio (Before)</h4>
                 <div class="visualizer-container">
@@ -388,7 +381,6 @@
             </div>
             <div id="logEnhance" class="log-box"><small>> AWAITING INPUT...</small></div>
             
-            <!-- RESULT AUDIO PLAYER -->
             <div id="enhanceResultSection" class="result-section">
                 <h4>Processed Voice (Result)</h4>
                 <div class="visualizer-container">
@@ -405,7 +397,6 @@
     </div>
   </main>
 
-  <!-- ADS 2 (LOWER) - ADSTERRA -->
   <div class="ad-container">
     <iframe class="ad-frame"
       title="Advertisement"
@@ -432,8 +423,6 @@
       ">
     </iframe>
   </div>
-  <!-- ADS END -->
-
   <article class="seo-content">
     <h2>Best Free Online Silence Remover and Audio Enhancer</h2>
     <p>Welcome to <strong>Audio Tool Pro</strong>. If you are looking for an <strong>Ai silence remove website</strong>, you have found the right place. Our tools run locally in your browser for maximum privacy.</p>
@@ -447,12 +436,10 @@
   </article>
 
 <script>
-// --- CORE UTILS ---
+// (SABHI JAVASCRIPT LOGIC PEHLE KI TARAH HI HAI...)
 async function readFileAsArrayBuffer(file){
   return await file.arrayBuffer();
 }
-
-// WAV Encoder
 function encodeWAV(buffers, sampleRate){
   const numChannels = buffers.length;
   const length = buffers[0].length;
@@ -482,8 +469,6 @@ function encodeWAV(buffers, sampleRate){
   }
   return new Blob([view], {type:'audio/wav'});
 }
-
-// MP3 Encoder
 function encodeMP3(channels, sampleRate) {
   if (!window.lamejs) return null;
   const mp3encoder = new lamejs.Mp3Encoder(channels.length, sampleRate, 128);
@@ -508,8 +493,6 @@ function encodeMP3(channels, sampleRate) {
   if (mp3buf.length > 0) mp3Data.push(mp3buf);
   return new Blob(mp3Data, { type: 'audio/mp3' });
 }
-
-// --- VISUALIZER ---
 let audioCtx; 
 function setupVisualizer(audioElement, canvasId) {
   const canvas = document.getElementById(canvasId);
@@ -523,15 +506,11 @@ function setupVisualizer(audioElement, canvasId) {
   if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const analyser = audioCtx.createAnalyser();
   analyser.fftSize = 256; 
-  
   try {
       const source = audioCtx.createMediaElementSource(audioElement);
       source.connect(analyser);
       analyser.connect(audioCtx.destination);
-  } catch(e) {
-      // Already connected
-  }
-
+  } catch(e) {}
   const bufferLength = analyser.frequencyBinCount;
   const dataArray = new Uint8Array(bufferLength);
   function draw() {
@@ -555,8 +534,6 @@ function setupVisualizer(audioElement, canvasId) {
   }
   draw();
 }
-
-// --- TAB SYSTEM ---
 function switchTab(tab) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -564,8 +541,6 @@ function switchTab(tab) {
     event.target.classList.add('active');
     if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
 }
-
-// --- LOGIC: SILENCE REMOVER ---
 const fileSilence = document.getElementById('fileSilence');
 const processSilenceBtn = document.getElementById('processSilence');
 const logSilence = document.getElementById('logSilence');
@@ -574,46 +549,32 @@ const audioSilenceIn = document.getElementById('audioSilenceIn');
 const silenceOriginalSection = document.getElementById('silenceOriginalSection');
 const silenceResultSection = document.getElementById('silenceResultSection');
 let silenceFileName = "Audio";
-
 fileSilence.addEventListener('change', ()=>{
     const f = fileSilence.files[0];
     if(!f) return;
     silenceFileName = f.name.replace(/\.[^/.]+$/, "");
-    
-    // PLAY ORIGINAL FILE IMMEDIATELY
     audioSilenceIn.src = URL.createObjectURL(f);
     silenceOriginalSection.style.display = 'block';
-    
     logSilence.innerHTML = '<small style="color:#00f3ff">> SOURCE FILE LOADED.</small>';
     silenceResultSection.style.display = 'none';
-    document.getElementById('dlSilenceWav').style.display='none';
-    document.getElementById('dlSilenceMp3').style.display='none';
 });
-
 processSilenceBtn.addEventListener('click', async ()=>{
     const f = fileSilence.files[0];
     if(!f){ alert('Please upload a file.'); return; }
     if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    
     processSilenceBtn.disabled=true; processSilenceBtn.textContent='PROCESSING...';
-    logSilence.innerHTML = '<small>> ANALYZING WAVEFORM...</small>';
-    
     try {
         const ab = await readFileAsArrayBuffer(f);
         const decoded = await audioCtx.decodeAudioData(ab.slice(0));
-        
         const minSilenceSec = parseFloat(document.getElementById('minSilence').value);
         const rmsThresh = parseFloat(document.getElementById('threshold').value);
-        
         const sr = decoded.sampleRate;
         const channelData = [];
         for(let c=0;c<decoded.numberOfChannels;c++) channelData.push(decoded.getChannelData(c));
         const frameMs = 10;
         const frameLen = Math.floor(sr*(frameMs/1000));
         const minFrames = Math.max(1, Math.floor((minSilenceSec*1000)/frameMs));
-        
         function getRms(b,s,e){let sum=0;let cnt=0;for(let i=s;i<e;i++){sum+=b[i]*b[i];cnt++;}return Math.sqrt(sum/Math.max(cnt,1));}
-        
         const frames=[];
         for(let i=0;i<channelData[0].length;i+=frameLen){
             frames.push(getRms(channelData[0],i,Math.min(i+frameLen,channelData[0].length)));
@@ -634,9 +595,6 @@ processSilenceBtn.addEventListener('click', async ()=>{
             }else{fIdx++;}
         }
         if(cur<channelData[0].length) ranges.push([cur, channelData[0].length]);
-        
-        if(ranges.length===0){ throw new Error("Result Empty"); }
-        
         let totalLen=0;
         ranges.forEach(r=>totalLen+=(r[1]-r[0]));
         const outCh=[];
@@ -647,18 +605,13 @@ processSilenceBtn.addEventListener('click', async ()=>{
             for(let c=0;c<channelData.length;c++) outCh[c].set(channelData[c].subarray(r[0],r[1]), wPos);
             wPos+=l;
         });
-        
         const wav = encodeWAV(outCh, sr);
         const url = URL.createObjectURL(wav);
-        
-        // SHOW RESULT
         silenceResultSection.style.display = 'block';
         audioSilenceOut.src=url;
         setupVisualizer(audioSilenceOut, 'canvasSilence');
-        
         const dlWav = document.getElementById('dlSilenceWav');
         dlWav.href=url; dlWav.download = `${silenceFileName}_Cleaned.wav`; dlWav.style.display='inline-flex';
-        
         if(window.lamejs){
              const mp3 = encodeMP3(outCh, sr);
              if(mp3){
@@ -667,15 +620,10 @@ processSilenceBtn.addEventListener('click', async ()=>{
                  dlMp3.href=mUrl; dlMp3.download=`${silenceFileName}_Cleaned.mp3`; dlMp3.style.display='inline-flex';
              }
         }
-        logSilence.innerHTML += `<br><small style="color:#00f3ff">> SUCCESS. REMOVED ${(decoded.duration - (totalLen/sr)).toFixed(2)}s</small>`;
-        
-    } catch(e) {
-        logSilence.innerHTML += `<br><small style="color:#ef4444">// ERROR: ${e.message}</small>`;
-    }
+        logSilence.innerHTML += `<br><small style="color:#00f3ff">> SUCCESS.</small>`;
+    } catch(e) { logSilence.innerHTML += `<br><small style="color:#ef4444">// ERROR: ${e.message}</small>`; }
     processSilenceBtn.disabled=false; processSilenceBtn.textContent='INITIALIZE CUT';
 });
-
-// --- LOGIC: AUDIO ENHANCER (LEXIS STYLE EQ) ---
 const fileEnhance = document.getElementById('fileEnhance');
 const processEnhanceBtn = document.getElementById('processEnhance');
 const logEnhance = document.getElementById('logEnhance');
@@ -684,42 +632,28 @@ const audioEnhanceIn = document.getElementById('audioEnhanceIn');
 const enhanceOriginalSection = document.getElementById('enhanceOriginalSection');
 const enhanceResultSection = document.getElementById('enhanceResultSection');
 let enhanceFileName = "Audio";
-
 fileEnhance.addEventListener('change', ()=>{
     const f = fileEnhance.files[0];
     if(!f) return;
     enhanceFileName = f.name.replace(/\.[^/.]+$/, "");
-    
-    // PLAY ORIGINAL
     audioEnhanceIn.src = URL.createObjectURL(f);
     enhanceOriginalSection.style.display = 'block';
-    
     logEnhance.innerHTML = '<small style="color:#00f3ff">> AUDIO BUFFERED.</small>';
     enhanceResultSection.style.display = 'none';
-    document.getElementById('dlEnhanceWav').style.display='none';
-    document.getElementById('dlEnhanceMp3').style.display='none';
 });
-
 processEnhanceBtn.addEventListener('click', async ()=>{
     const f = fileEnhance.files[0];
     if(!f){ alert('Please upload a file.'); return; }
     if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    
     processEnhanceBtn.disabled=true; processEnhanceBtn.textContent='ENHANCING...';
-    logEnhance.innerHTML = '<small>> APPLYING EQ FILTERS...</small>';
-    
     try {
         const ab = await readFileAsArrayBuffer(f);
         const decoded = await audioCtx.decodeAudioData(ab.slice(0));
-        
         const type = document.getElementById('enhanceType').value;
         const intensity = parseFloat(document.getElementById('enhanceIntensity').value);
-
         const offlineCtx = new OfflineAudioContext(decoded.numberOfChannels, decoded.length, decoded.sampleRate);
         const source = offlineCtx.createBufferSource();
         source.buffer = decoded;
-        
-        // --- 10-BAND EQ CHAIN ---
         let currentNode = source;
         function addFilter(freq, gain, type='peaking', Q=1.0){
             const node = offlineCtx.createBiquadFilter();
@@ -730,59 +664,37 @@ processEnhanceBtn.addEventListener('click', async ()=>{
             currentNode.connect(node);
             currentNode = node;
         }
-
         if(type === 'lexis') {
-            // "V-Shape" EQ based on user screenshot
-            addFilter(32, 9.0, 'lowshelf'); // +9dB Bass
+            addFilter(32, 9.0, 'lowshelf');
             addFilter(62, 5.0, 'peaking');  
             addFilter(125, 2.0, 'peaking'); 
-            
-            // Highs (Boosted)
             addFilter(8000, 4.0, 'peaking');  
-            addFilter(16000, 9.0, 'highshelf');// +9dB Air
-        } 
-        else if(type === 'voice') {
+            addFilter(16000, 9.0, 'highshelf');
+        } else if(type === 'voice') {
             addFilter(80, -10.0, 'highpass'); 
-            addFilter(300, -2.0); 
             addFilter(3000, 4.0); 
-            addFilter(10000, 2.0, 'highshelf'); 
         }
-
-        // COMPRESSOR
         const compressor = offlineCtx.createDynamicsCompressor();
         compressor.threshold.value = -20;
-        compressor.knee.value = 30;
         compressor.ratio.value = 4;
-        compressor.attack.value = 0.003;
-        compressor.release.value = 0.25;
         currentNode.connect(compressor);
         currentNode = compressor;
-
-        // GAIN
         const gainNode = offlineCtx.createGain();
         gainNode.gain.value = 1.5; 
         currentNode.connect(gainNode);
         currentNode = gainNode;
-
         currentNode.connect(offlineCtx.destination);
         source.start();
-        
         const renderedBuffer = await offlineCtx.startRendering();
-        
         const outCh = [];
         for(let c=0;c<renderedBuffer.numberOfChannels;c++) outCh.push(renderedBuffer.getChannelData(c));
-        
         const wav = encodeWAV(outCh, renderedBuffer.sampleRate);
         const url = URL.createObjectURL(wav);
-        
-        // SHOW RESULT
         enhanceResultSection.style.display = 'block';
         audioEnhanceOut.src=url;
         setupVisualizer(audioEnhanceOut, 'canvasEnhance');
-        
         const dlWav = document.getElementById('dlEnhanceWav');
         dlWav.href=url; dlWav.download = `${enhanceFileName}_LexisEnhance.wav`; dlWav.style.display='inline-flex';
-        
         if(window.lamejs){
              const mp3 = encodeMP3(outCh, renderedBuffer.sampleRate);
              if(mp3){
@@ -792,15 +704,9 @@ processEnhanceBtn.addEventListener('click', async ()=>{
              }
         }
         logEnhance.innerHTML += `<br><small style="color:#00f3ff">> ENHANCEMENT COMPLETE.</small>`;
-
-    } catch(e) {
-        console.error(e);
-        logEnhance.innerHTML += `<br><small style="color:#ef4444">// ERROR: ${e.message}</small>`;
-    }
+    } catch(e) { logEnhance.innerHTML += `<br><small style="color:#ef4444">// ERROR: ${e.message}</small>`; }
     processEnhanceBtn.disabled=false; processEnhanceBtn.textContent='ENGAGE ENHANCER';
 });
 </script>
 </body>
 </html>
-
-
