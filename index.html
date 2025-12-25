@@ -78,6 +78,7 @@
             box-shadow: 0 0 10px #f43f5e;
             display: none;
             pointer-events: none;
+            z-index: 20;
         }
 
         /* SEO Section Styling */
@@ -88,16 +89,30 @@
         .faq-item { @apply border-b border-white/5 pb-4 mb-4; }
         .faq-q { @apply font-bold text-indigo-200 mb-2 block; }
         .faq-a { @apply text-gray-400 text-sm; }
+
+        .neo-input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: border-color 0.3s ease;
+        }
+        .neo-input:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        /* Hide the MS input container as requested */
+        .hidden-config { display: none; }
     </style>
 </head>
 <body class="p-4 md:p-8 flex flex-col items-center">
 
     <div class="max-w-6xl w-full">
-        <!-- H1 SECTION -->
+        <!-- HEADER / H1 -->
         <header class="text-center mb-12">
             <div class="inline-flex items-center gap-2 px-4 py-1 bg-indigo-500/10 rounded-full border border-indigo-500/20 mb-4">
                 <i data-lucide="sparkles" class="w-4 h-4 text-indigo-400"></i>
-                <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-300">AI Powered Engine</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-300">AI Powered Cleanup</span>
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-100 to-indigo-400 mb-4">
                 AI Silence Remover – Remove Silent Parts from Audio Online
@@ -107,20 +122,24 @@
             </p>
         </header>
 
-        <!-- TOOL DASHBOARD -->
+        <!-- TOOL SECTION -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
-            <!-- Sidebar -->
+            <!-- Settings Sidebar -->
             <aside class="lg:col-span-4 space-y-6">
                 <div class="glass-panel p-8">
                     <h3 class="font-bold text-lg mb-8 flex items-center gap-2">
-                        <i data-lucide="sliders" class="w-5 h-5 text-indigo-400"></i> Settings
+                        <i data-lucide="sliders" class="w-5 h-5 text-indigo-400"></i> Configuration
                     </h3>
 
                     <div class="space-y-6">
                         <div>
-                            <label class="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-3">RMS Threshold</label>
-                            <input type="number" id="rms-input" step="0.001" value="0.004" class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl font-mono text-2xl outline-none focus:border-indigo-500 transition-all">
+                            <label class="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-3">RMS Threshold (Sensitivity)</label>
+                            <input type="number" id="rms-input" step="0.001" value="0.004" class="neo-input w-full p-4 rounded-2xl font-mono text-xl">
+                            <p class="text-[10px] text-gray-500 mt-2 italic">Standard Optimized: 0.004</p>
                         </div>
+
+                        <!-- MS input hidden as requested, value set to 1 -->
+                        <input type="hidden" id="ms-input" value="1">
 
                         <div class="pt-4">
                             <label id="drop-zone" class="flex flex-col items-center justify-center p-8 border-2 border-dashed border-white/10 rounded-3xl cursor-pointer hover:border-indigo-500 hover:bg-indigo-500/5 transition-all group text-center text-gray-400">
@@ -131,31 +150,31 @@
                         </div>
 
                         <button id="process-btn" disabled class="btn-premium w-full py-5 rounded-2xl font-bold uppercase tracking-widest disabled:opacity-20 flex items-center justify-center gap-2 text-white">
-                            <i data-lucide="zap" class="w-5 h-5"></i> Start Processing
+                            <i data-lucide="zap" class="w-5 h-5"></i> Process Audio
                         </button>
                     </div>
                 </div>
             </aside>
 
-            <!-- Main Results -->
+            <!-- Playback & Visualization -->
             <main class="lg:col-span-8 space-y-6">
                 <div id="status-panel" class="hidden glass-panel p-6 border-indigo-500/30 overflow-hidden relative">
                     <div class="flex items-center justify-between mb-3">
-                        <span class="text-sm font-bold text-indigo-400">AI Analysis in Progress...</span>
-                        <span id="status-percent" class="text-2xl font-black">0%</span>
+                        <span class="text-sm font-bold text-indigo-400">AI Analysis & Removal: <span id="status-percent">0%</span></span>
                     </div>
-                    <div class="h-2 w-full bg-black/40 rounded-full overflow-hidden">
-                        <div id="status-bar" class="h-full bg-indigo-500 w-0 transition-all duration-300"></div>
+                    <div class="h-2.5 w-full bg-black/40 rounded-full overflow-hidden">
+                        <div id="status-bar" class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 w-0 transition-all duration-300"></div>
                     </div>
                 </div>
 
+                <!-- Original Audio Card -->
                 <div class="glass-panel p-6">
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-[10px] font-bold bg-white/5 px-2 py-0.5 rounded text-gray-500 uppercase">Input Audio</span>
                         <div class="flex items-center gap-4">
                             <span id="orig-dur" class="text-xs font-mono text-indigo-400">00:00.000</span>
                             <button id="play-orig" disabled class="text-indigo-400 disabled:opacity-10 hover:scale-110 transition-transform">
-                                <i data-lucide="play-circle" class="w-8 h-8 fill-current"></i>
+                                <i data-lucide="play-circle" class="w-10 h-10 fill-current"></i>
                             </button>
                         </div>
                     </div>
@@ -165,13 +184,14 @@
                     </div>
                 </div>
 
+                <!-- Result Audio Card -->
                 <div class="glass-panel p-6 border-indigo-500/10">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="text-[10px] font-bold bg-indigo-500/10 px-2 py-0.5 rounded text-indigo-400 uppercase">AI Output</span>
+                        <span class="text-[10px] font-bold bg-indigo-500/10 px-2 py-0.5 rounded text-indigo-400 uppercase">AI Cleaned Result</span>
                         <div class="flex items-center gap-4">
                             <span id="proc-dur" class="text-xs font-mono text-purple-400">00:00.000</span>
                             <button id="play-proc" disabled class="text-purple-400 disabled:opacity-10 hover:scale-110 transition-transform">
-                                <i data-lucide="play-circle" class="w-8 h-8 fill-current"></i>
+                                <i data-lucide="play-circle" class="w-10 h-10 fill-current"></i>
                             </button>
                         </div>
                     </div>
@@ -192,50 +212,50 @@
             </main>
         </div>
 
-        <!-- SEO LONG CONTENT -->
+        <!-- SEO ARTICLE CONTENT -->
         <article class="glass-panel p-8 md:p-16 mb-20 seo-content">
             <h2>Remove Silence from Audio Automatically Using AI</h2>
             <p>
                 AI Silence Remover is a powerful online tool designed to automatically detect and remove silent parts from audio files. Whether you are a YouTuber, podcaster, voice-over artist, student, or content creator, this tool helps you clean audio effortlessly.
             </p>
             <p>
-                With advanced AI-based audio processing, the Silence Remover analyzes your MP3 or WAV files and removes unnecessary pauses, background silence, and dead air while preserving natural speech flow.
+                With advanced AI-based audio processing, the Silence Remover analyzes your MP3 or WAV files and removes unnecessary pauses, background silence, and dead air while preserving natural speech flow. Our tool works with extreme precision (0.004 RMS) to ensure your voice remains untouched.
             </p>
 
-            <h3>Key Features</h3>
+            <h3>Key Features (SEO Friendly)</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
                 <div class="feature-tag">✔ AI-powered silence detection</div>
                 <div class="feature-tag">✔ Remove silent parts automatically</div>
                 <div class="feature-tag">✔ Supports MP3 & WAV formats</div>
-                <div class="feature-tag">✔ Custom silence threshold</div>
+                <div class="feature-tag">✔ Custom silence threshold control</div>
                 <div class="feature-tag">✔ Preview before download</div>
-                <div class="feature-tag">✔ No installation required</div>
-                <div class="feature-tag">✔ Fast processing</div>
+                <div class="feature-tag">✔ No software installation required</div>
+                <div class="feature-tag">✔ Fast processing & High-quality</div>
                 <div class="feature-tag">✔ Works on mobile & desktop</div>
-                <div class="feature-tag">✔ 100% Free online tool</div>
+                <div class="feature-tag">✔ 100% free online tool</div>
             </div>
 
-            <h3>Frequently Asked Questions</h3>
-            <div class="bg-white/5 rounded-3xl p-8 border border-white/10">
+            <div class="bg-white/5 rounded-3xl p-8 border border-white/10 mb-10">
+                <h3 class="mb-6">FAQ Section (SEO Boost)</h3>
                 <div class="faq-item">
                     <span class="faq-q">Q: What is AI Silence Remover?</span>
                     <span class="faq-a">A: AI Silence Remover is an online tool that automatically removes silent parts from audio files using artificial intelligence.</span>
                 </div>
                 <div class="faq-item border-none">
                     <span class="faq-q">Q: Is this silence remover free?</span>
-                    <span class="faq-a">A: Yes, it is completely free to use directly in your browser without any subscription.</span>
+                    <span class="faq-a">A: Yes, it is completely free to use directly in your browser without any hidden charges.</span>
                 </div>
             </div>
 
-            <footer class="text-center pt-8 mt-8 border-t border-white/5">
+            <footer class="text-center pt-8 border-t border-white/5">
                 <p class="text-[10px] font-bold text-gray-600 uppercase tracking-[0.4em]">
-                    &copy; 2025 AI Silence Remover Tool - Professional Audio Cleanup
+                    &copy; 2025 AI Silence Remover - Professional Studio Cleanup
                 </p>
             </footer>
         </article>
     </div>
 
-    <!-- Notification Toast -->
+    <!-- Toast Component -->
     <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 glass-panel px-8 py-4 flex items-center gap-3 translate-y-40 transition-transform duration-500 z-50">
         <i data-lucide="check-circle" class="w-5 h-5 text-indigo-400"></i>
         <span id="toast-txt" class="text-sm font-bold text-gray-200">Processing Complete!</span>
@@ -251,8 +271,8 @@
         let originalBuffer, processedBuffer;
         let originalSource, processedSource;
         let isPlayingOrig = false, isPlayingProc = false;
-        let startOrigTime = 0, startProcTime = 0;
-        let baseName = "audio";
+        let startTimeOrig = 0, startTimeProc = 0;
+        let baseFileName = "audio";
 
         const ui = {
             fileIn: document.getElementById('audio-input'),
@@ -263,6 +283,7 @@
             dlWav: document.getElementById('dl-wav'),
             dlMp3: document.getElementById('dl-mp3'),
             rmsIn: document.getElementById('rms-input'),
+            msIn: document.getElementById('ms-input'), // Hidden input
             origDur: document.getElementById('orig-dur'),
             procDur: document.getElementById('proc-dur'),
             canvasOrig: document.getElementById('canvas-orig'),
@@ -293,8 +314,8 @@
             const file = e.target.files[0];
             if (!file) return;
 
-            baseName = file.name.split('.').slice(0, -1).join('.');
-            ui.label.innerText = "Audio Loaded";
+            baseFileName = file.name.split('.').slice(0, -1).join('.');
+            ui.label.innerText = "Audio Selected";
             
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             const buffer = await file.arrayBuffer();
@@ -305,45 +326,48 @@
                 drawWaveform(originalBuffer, ui.canvasOrig, '#6366f1');
                 ui.processBtn.disabled = false;
                 ui.playOrig.disabled = false;
-                showToast("File Ready");
+                showToast("File Ready to Process");
             } catch (err) {
-                showToast("Error Loading");
+                showToast("Decoding Error");
             }
         };
 
         ui.processBtn.onclick = async () => {
+            if (!originalBuffer) return;
             const threshold = parseFloat(ui.rmsIn.value) || 0.004;
+            const minSilenceMs = parseFloat(ui.msIn.value) || 1; // Fixed at 1 background value
             ui.status.classList.remove('hidden');
             ui.processBtn.disabled = true;
 
             const sr = originalBuffer.sampleRate;
-            const step = Math.floor(sr * 0.01); 
+            const chunkStep = Math.floor(sr * 0.01); 
+            const minSilenceSamples = Math.floor(sr * (minSilenceMs / 1000));
             const channels = originalBuffer.numberOfChannels;
             const dataArr = Array.from({length: channels}, (_, c) => originalBuffer.getChannelData(c));
             
             let segments = [];
-            let start = -1;
+            let currentStart = -1;
 
-            const processAsync = () => {
+            const analyzeAudio = () => {
                 return new Promise((resolve) => {
                     let i = 0;
                     const loop = () => {
-                        const batch = Math.min(i + (step * 200), originalBuffer.length);
-                        for (; i < batch; i += step) {
+                        const batchLimit = Math.min(i + (chunkStep * 150), originalBuffer.length);
+                        for (; i < batchLimit; i += chunkStep) {
                             let rms = 0;
-                            const currentEnd = Math.min(i + step, originalBuffer.length);
+                            const end = Math.min(i + chunkStep, originalBuffer.length);
                             for (let c = 0; c < channels; c++) {
                                 let sum = 0;
-                                for (let j = i; j < currentEnd; j++) sum += dataArr[c][j] * dataArr[c][j];
-                                rms = Math.max(rms, Math.sqrt(sum / (currentEnd - i)));
+                                for (let j = i; j < end; j++) sum += dataArr[c][j] * dataArr[c][j];
+                                rms = Math.max(rms, Math.sqrt(sum / (end - i)));
                             }
 
                             if (rms >= threshold) {
-                                if (start === -1) start = i;
+                                if (currentStart === -1) currentStart = i;
                             } else {
-                                if (start !== -1) {
-                                    segments.push({start, end: i});
-                                    start = -1;
+                                if (currentStart !== -1) {
+                                    segments.push({start: currentStart, end: i});
+                                    currentStart = -1;
                                 }
                             }
                         }
@@ -355,7 +379,7 @@
                         if (i < originalBuffer.length) {
                             requestAnimationFrame(loop);
                         } else {
-                            if (start !== -1) segments.push({start, end: originalBuffer.length});
+                            if (currentStart !== -1) segments.push({start: currentStart, end: originalBuffer.length});
                             resolve();
                         }
                     };
@@ -363,15 +387,32 @@
                 });
             };
 
-            await processAsync();
+            await analyzeAudio();
 
-            let totalLen = segments.reduce((acc, s) => acc + (s.end - s.start), 0);
+            // Refine Segments (Gaps check)
+            let refined = [];
+            if (segments.length > 0) {
+                let curr = segments[0];
+                for (let j = 1; j < segments.length; j++) {
+                    let gap = segments[j].start - curr.end;
+                    if (gap < minSilenceSamples) {
+                        curr.end = segments[j].end;
+                    } else {
+                        refined.push(curr);
+                        curr = segments[j];
+                    }
+                }
+                refined.push(curr);
+            }
+
+            // Reconstruct Result
+            let totalLen = refined.reduce((acc, s) => acc + (s.end - s.start), 0);
             processedBuffer = audioCtx.createBuffer(channels, totalLen, sr);
 
             for (let c = 0; c < channels; c++) {
                 const out = processedBuffer.getChannelData(c);
                 let offset = 0;
-                for (const s of segments) {
+                for (const s of refined) {
                     out.set(dataArr[c].subarray(s.start, s.end), offset);
                     offset += (s.end - s.start);
                 }
@@ -388,7 +429,7 @@
             ui.dlWav.classList.remove('opacity-10');
             ui.dlMp3.classList.remove('opacity-10');
             
-            showToast("Success!");
+            showToast("Success! Silence Removed.");
         };
 
         function drawWaveform(buffer, canvas, color) {
@@ -400,8 +441,8 @@
             ctx.scale(dpr, dpr);
 
             const data = buffer.getChannelData(0);
-            const stepSize = Math.ceil(data.length / rect.width);
-            const center = rect.height / 2;
+            const step = Math.ceil(data.length / rect.width);
+            const mid = rect.height / 2;
 
             ctx.clearRect(0, 0, rect.width, rect.height);
             ctx.beginPath();
@@ -410,20 +451,20 @@
 
             for (let i = 0; i < rect.width; i++) {
                 let min = 1, max = -1;
-                for (let j = 0; j < stepSize; j++) {
-                    const datum = data[(i * stepSize) + j];
+                for (let j = 0; j < step; j++) {
+                    const datum = data[(i * step) + j];
                     if (datum < min) min = datum;
                     if (datum > max) max = datum;
                 }
-                ctx.moveTo(i, (1 + min) * center);
-                ctx.lineTo(i, (1 + max) * center);
+                ctx.moveTo(i, (1 + min) * mid);
+                ctx.lineTo(i, (1 + max) * mid);
             }
             ctx.stroke();
         }
 
         function updatePlayhead(isOrig) {
             const head = isOrig ? ui.headOrig : ui.headProc;
-            const start = isOrig ? startOrigTime : startProcTime;
+            const start = isOrig ? startTimeOrig : startTimeProc;
             const buf = isOrig ? originalBuffer : processedBuffer;
             const playing = isOrig ? isPlayingOrig : isPlayingProc;
 
@@ -461,15 +502,15 @@
             if (isOrig) {
                 originalSource = source;
                 isPlayingOrig = true;
-                startOrigTime = audioCtx.currentTime;
+                startTimeOrig = audioCtx.currentTime;
             } else {
                 processedSource = source;
                 isPlayingProc = true;
-                startProcTime = audioCtx.currentTime;
+                startTimeProc = audioCtx.currentTime;
             }
 
             source.start(0);
-            btn.innerHTML = '<i data-lucide="square" class="w-8 h-8 fill-current"></i>';
+            btn.innerHTML = '<i data-lucide="square" class="w-10 h-10 fill-current"></i>';
             lucide.createIcons();
             updatePlayhead(isOrig);
             source.onended = () => stopAudio(isOrig);
@@ -480,7 +521,7 @@
             const btn = isOrig ? ui.playOrig : ui.playProc;
             if (source) try { source.stop(); } catch(e) {}
             if (isOrig) isPlayingOrig = false; else isPlayingProc = false;
-            btn.innerHTML = '<i data-lucide="play-circle" class="w-8 h-8 fill-current"></i>';
+            btn.innerHTML = '<i data-lucide="play-circle" class="w-10 h-10 fill-current"></i>';
             lucide.createIcons();
         }
 
@@ -513,9 +554,9 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${baseName}_silenced.${ext}`;
+            a.download = `${baseFileName}_silenced.${ext}`;
             a.click();
-            showToast(`Downloading ${ext.toUpperCase()}`);
+            showToast(`Exporting ${ext.toUpperCase()}`);
         }
 
         ui.dlWav.onclick = () => download('wav');
